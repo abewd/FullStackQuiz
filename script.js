@@ -87,3 +87,54 @@ var quizQuestions = [
     correctAnswer: "d",
   },
 ];
+// These variable is used for shifting through questions and is also used to end the quiz using an if statement later
+var finalQuestionIndex = quizQuestions.length;
+// This is the current question var which shows different questions and will be used for an if statement later to end the quiz
+var currentQuestionIndex = 0;
+// This var is used to denote the time for the quiz
+var timeLeft = 70;
+var timerInterval;
+// Initial score, an if statement will be used to ++i if the answer is correct to then show a final score for the leaderboard
+var score = 0;
+var correct;
+
+// This function shifts through the questions in the quiz to display the questions and answers.
+function generateQuizQuestion() {
+  gameoverDiv.style.display = "none";
+  if (currentQuestionIndex === finalQuestionIndex) {
+    return showScore();
+  }
+
+  // Assigning the question to the correct answer
+  var currentQuestion = quizQuestions[currentQuestionIndex];
+  questionsEl.innerHTML = "<p>" + currentQuestion.question + "</p>";
+  buttonA.innerHTML = currentQuestion.choiceA;
+  buttonB.innerHTML = currentQuestion.choiceB;
+  buttonC.innerHTML = currentQuestion.choiceC;
+  buttonD.innerHTML = currentQuestion.choiceD;
+}
+
+// Start Quiz function starts the timer, the (Start!) button will disappear and the first question will be displayed
+function startQuiz() {
+  gameoverDiv.style.display = "none";
+  // Remove the start button
+  startQuizDiv.style.display = "none";
+  // Display first question in sequence
+  generateQuizQuestion();
+
+  //Timer function
+  timerInterval = setInterval(function () {
+    timeLeft--;
+    // Time Remaining text displayed on top of the page
+    quizTimer.textContent = "Time Remaining: " + timeLeft;
+
+    // When the timer gets to "1" the timer will be removed and the quiz will end
+    if (timeLeft === 1) {
+      clearInterval(timerInterval);
+      // Your score will also be displayed after the quiz ends
+      showScore();
+    }
+    //1000 milliseconds progression in reverse, etc. 5 4 3 2 1 ...
+  }, 1000);
+  quizBody.style.display = "block";
+}
