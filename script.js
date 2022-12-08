@@ -151,3 +151,100 @@ function showScore() {
     // Display message about your final score
     "You scored " + score + " out of " + quizQuestions.length + " correct!";
 }
+// When the submit button is lcicked the highscore function will save the array of high scores
+// This is saved in a local storage
+submitScoreBtn.addEventListener("click", function highscore() {
+  if (highscoreInputName.value === "") {
+    alert("Please insert your name!");
+    return false;
+  } else {
+    var savedHighscores =
+      JSON.parse(localStorage.getItem("savedHighscores")) || [];
+    var currentUser = highscoreInputName.value.trim();
+    var currentHighscore = {
+      name: currentUser,
+      score: score,
+    };
+
+    // Center and flex the leaderboard
+    gameoverDiv.style.display = "none";
+    highscoreContainer.style.display = "flex";
+    highscoreDiv.style.display = "block";
+    endGameBtns.style.display = "flex";
+
+    // Upload the high scores to the local storage
+    savedHighscores.push(currentHighscore);
+    localStorage.setItem("savedHighscores", JSON.stringify(savedHighscores));
+    generateHighscores();
+  }
+});
+
+// This function formats the high scores on the local storage
+function generateHighscores() {
+  highscoreDisplayName.innerHTML = "";
+  highscoreDisplayScore.innerHTML = "";
+  var highscores = JSON.parse(localStorage.getItem("savedHighscores")) || [];
+  for (i = 0; i < highscores.length; i++) {
+    var newNameSpan = document.createElement("li");
+    var newScoreSpan = document.createElement("li");
+    newNameSpan.textContent = highscores[i].name;
+    newScoreSpan.textContent = highscores[i].score;
+    highscoreDisplayName.appendChild(newNameSpan);
+    highscoreDisplayScore.appendChild(newScoreSpan);
+  }
+}
+
+// This function displays the high scores page
+// This is activated when the (Leader Board) button is clicked
+function showHighscore() {
+  startQuizDiv.style.display = "none";
+  gameoverDiv.style.display = "none";
+  highscoreContainer.style.display = "flex";
+  highscoreDiv.style.display = "block";
+  endGameBtns.style.display = "flex";
+
+  generateHighscores();
+}
+
+// This function formats the local storage and the text as well equation them both to ""
+function clearScore() {
+  window.localStorage.clear();
+  highscoreDisplayName.textContent = "";
+  highscoreDisplayScore.textContent = "";
+}
+
+// This function resets all variables back to "none" and "0" like the scores and high score numbers
+function replayQuiz() {
+  highscoreContainer.style.display = "none";
+  gameoverDiv.style.display = "none";
+  startQuizDiv.style.display = "flex";
+  timeLeft = 75;
+  score = 0;
+  currentQuestionIndex = 0;
+}
+
+// This function checks each answer to see if its correct or not
+function checkAnswer(answer) {
+  correct = quizQuestions[currentQuestionIndex].correctAnswer;
+
+  if (answer === correct && currentQuestionIndex !== finalQuestionIndex) {
+    score++;
+    alert("Well done, Correct!");
+    currentQuestionIndex++;
+    generateQuizQuestion();
+    //display the results div that the answer is correct.
+  } else if (
+    answer !== correct &&
+    currentQuestionIndex !== finalQuestionIndex
+  ) {
+    alert("Incorrect!");
+    currentQuestionIndex++;
+    generateQuizQuestion();
+    //display in the results div that the answer is wrong.
+  } else {
+    showScore();
+  }
+}
+
+// This button starts the quiz
+startQuizButton.addEventListener("click", startQuiz);
