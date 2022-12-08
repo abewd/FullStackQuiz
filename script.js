@@ -138,3 +138,16 @@ function startQuiz() {
   }, 1000);
   quizBody.style.display = "block";
 }
+// The showScore function is what happens when the quiz ends (runs out of time) or the questions are completed
+function showScore() {
+  quizBody.style.display = "none";
+  // When you complete the questions
+  gameoverDiv.style.display = "flex";
+  // When the time runs out
+  clearInterval(timerInterval);
+  // Enter your name to register it to the leaderboard
+  highscoreInputName.value = "";
+  finalScoreEl.innerHTML =
+    // Display message about your final score
+    "You scored " + score + " out of " + quizQuestions.length + " correct!";
+}
