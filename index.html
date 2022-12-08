@@ -7,17 +7,25 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- This is the home-page of the quiz -->
+    <!-- The container class is the container for the homepage -->
     <div class="container">
       <div id="startpage">
+        <!-- Introductory title -->
         <h2>WELCOME TO QUIZ 1</h2>
+        <!-- Quiz information, sub-heading -->
         <h2>70 seconds. 7 Questions. No cheating!</h2>
+        <!-- Further instructions for the quiz, smaller heading h3 -->
         <h3>If you don't get 100% you owe me $50</h3>
+        <!-- Insert (Start!) button -->
         <button id="startbtn">Start!</button>
+        <!-- Insert (Leader Bard) button -->
         <button id="startPageHighscore" onclick="showHighscore()">
           Leader Board
         </button>
       </div>
 
+      <!-- Creating a div for the quiz buttons (answers) and counter -->
       <div id="quiz">
         <div id="timer">Time remaining:</div>
         <div id="questions"><p>Questions Placeholder</p></div>
@@ -29,15 +37,20 @@
       </div>
       <div id="gameover">
         <div id="finalScore"></div>
+
+        <!-- Input html aspects for the screen after the quiz is complete -->
         <input
           type="text"
-          size="40"
+          size="45"
           placeholder="Enter your name to be placed on the leaderboard!"
           name="intials"
           id="initials"
         />
+        <!-- Insert (Submit Score) button -->
         <button id="submitScore">Submit!</button>
       </div>
+
+      <!-- Creating ID's to contain a high score -->
       <div id="highscoreContainer">
         <div id="high-scorePage">
           <div id="highscore-header">
@@ -48,7 +61,9 @@
           <div id="highscore-score"></div>
         </div>
         <div id="endGameBtns">
+          <!-- Insert (Play Again) button -->
           <button id="playAgain" onclick="replayQuiz()">Retry</button>
+          <!-- Insert (Clear Leadrboard) button -->
           <button id="clearHighscore" onclick="clearScore()">
             Clear Leader Board
           </button>
