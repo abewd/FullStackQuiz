@@ -2,16 +2,59 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=
-    , initial-scale=1.0"
-    />
-    <link rel="stylesheet" href="index.html" />
-    <script src="script.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
+  <body>
+    <div class="container">
+      <div id="startpage">
+        <h2>WELCOME TO QUIZ 1</h2>
+        <h2>70 seconds. 7 Questions. No cheating!</h2>
+        <h3>If you don't get 100% you owe me $50</h3>
+        <button id="startbtn">Start!</button>
+        <button id="startPageHighscore" onclick="showHighscore()">
+          Leader Board
+        </button>
+      </div>
 
-  <body></body>
+      <div id="quiz">
+        <div id="timer">Time remaining:</div>
+        <div id="questions"><p>Questions Placeholder</p></div>
+        <button id="a" onclick="checkAnswer('a')">A</button>
+        <button id="b" onclick="checkAnswer('b')">B</button>
+        <button id="c" onclick="checkAnswer('c')">C</button>
+        <button id="d" onclick="checkAnswer('d')">D</button>
+        <div id="result"></div>
+      </div>
+      <div id="gameover">
+        <div id="finalScore"></div>
+        <input
+          type="text"
+          size="40"
+          placeholder="Enter your name to be placed on the leaderboard!"
+          name="intials"
+          id="initials"
+        />
+        <button id="submitScore">Submit!</button>
+      </div>
+      <div id="highscoreContainer">
+        <div id="high-scorePage">
+          <div id="highscore-header">
+            <h3>User Name</h3>
+            <h3>Score</h3>
+          </div>
+          <div id="highscore-initials"></div>
+          <div id="highscore-score"></div>
+        </div>
+        <div id="endGameBtns">
+          <button id="playAgain" onclick="replayQuiz()">Retry</button>
+          <button id="clearHighscore" onclick="clearScore()">
+            Clear Leader Board
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
